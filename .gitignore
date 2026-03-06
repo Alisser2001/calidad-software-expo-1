@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.manifest
+*.spe
+
+# Logs y Temporales
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.DS_Store
+htmlcov/
+*.coverage
+*.coveragerc
+.pytest_cache/
+*.coverage.*
+.sonar/
+coverage.*
+xunit-reports/
+html5up-*
+
+# Variables de Entorno
+.env
+.env.*
+
+# Entornos Virtuales
+venv/
+env/
+ENV/
+.venv/
+.python-version
+
+# Editores de Código
+.vscode/
+.idea/
+
+# JWT
+*.key
+*.crt

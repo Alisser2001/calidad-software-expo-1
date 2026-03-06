@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "user-service"
+version = "0.1.0"
+description = "User Service"
+authors = ["GEB Team <team@geb.com>"]
+readme = "README.md"
+packages = [{ include = "src" }]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.13,<4.0"
+fastapi = ">=0.110"
+uvicorn = { version = "*", extras = ["standard"] }
+pydantic = ">=2"
+pydantic-settings = ">=2"
+python-dotenv = ">=1.0"
+kink = ">=0.8.1"
+pymongo = ">=4.15.3"
+
+[tool.poetry.group.test.dependencies]
+pytest = ">=7.4"
+pytest-asyncio = ">=0.23"
+coverage = ">=7.10.7"
+pytest-cov = ">=7.0.0"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+addopts = "-q"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
