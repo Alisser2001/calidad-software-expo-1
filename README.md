@@ -58,7 +58,7 @@ docker run --name user-service-app -p 8000:8000 user-service
 
 ```bash
 # Test Unitarios
-pytest -m unit
+pytest
 # Pruebas de Cobertura
 coverage erase
 coverage run -m pytest
