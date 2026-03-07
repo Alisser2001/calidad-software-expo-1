@@ -21,7 +21,7 @@ def ensure_user_roles_collection(db):
         if "user_roles" not in db.list_collection_names():
             db.create_collection("user_roles")
         col = db["user_roles"]
-        col.create_index("email")
+        col.create_index("email", unique=True)
         col.create_index("role")
     except errors.CollectionInvalid:
         pass  
