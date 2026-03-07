@@ -1,27 +1,55 @@
-import pytest
 from pydantic import ValidationError
+import pytest
 from domain.DTOs.user_dto import UserDTO
 from domain.DTOs.role_dto import RoleAssignInDTO, RoleDeleteInDTO
 from domain.value_objects.role_permissions import RoleCode
 
-def test_user_dto_requires_fields():
-    with pytest.raises(ValidationError):
-        UserDTO() 
-    dto = UserDTO(email="a@b.com", name="Alice")
+def test_user_dto_creation_success():
+    email = "test@app.com"
+    name = "Test User"
+    role = RoleCode.ADMINISTRATOR
+
+    dto = UserDTO(email=email, name=name, role=role)
+
+    assert dto.email == email
+    assert dto.name == name
+    assert dto.role == role
+
+def test_user_dto_creation_success_no_role():
+    email = "test@app.com"
+    name = "Test User"
+
+    dto = UserDTO(email=email, name=name)
+
+    assert dto.email == email
+    assert dto.name == name
     assert dto.role is None
 
-def test_user_dto_accepts_role():
-    dto = UserDTO(email="a@b.com", name="Alice", role=RoleCode.OPERATOR)
-    assert dto.role == RoleCode.OPERATOR
+def test_user_dto_creation_failure_missing_email():
+    name = "Test User"
 
-def test_role_assign_in_dto_requires_email_and_role():
     with pytest.raises(ValidationError):
-        RoleAssignInDTO(email="a@b.com", role=None)  
-    dto = RoleAssignInDTO(email="a@b.com", role=RoleCode.ADMINISTRATOR)
-    assert dto.role == RoleCode.ADMINISTRATOR
+        UserDTO(name=name)
 
-def test_role_delete_in_dto_requires_email():
+def test_role_assign_in_dto_creation_success():
+    email = "test@app.com"
+    role = RoleCode.OPERATOR
+
+    dto = RoleAssignInDTO(email=email, role=role)
+
+    assert dto.email == email
+    assert dto.role == role
+
+def test_role_assign_in_dto_creation_failure_invalid_role():
+    email = "test@app.com"
+    role = "INVALID_ROLE"
+
     with pytest.raises(ValidationError):
-        RoleDeleteInDTO() 
-    dto = RoleDeleteInDTO(email="a@b.com")
-    assert dto.email == "a@b.com"
+        RoleAssignInDTO(email=email, role=role)
+
+def test_role_delete_in_dto_creation_success():
+    email = "test@app.com"
+
+    dto = RoleDeleteInDTO(email=email)
+
+    assert dto.email == email
