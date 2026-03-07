@@ -19,7 +19,7 @@ def test_ensure_client_initialization_success():
         with patch("infrastructure.adapters.persistence.mongodb.mongo_repository.MongoClient") as mock_mongo:
             with patch("infrastructure.adapters.persistence.mongodb.mongo_repository.ensure_user_roles_collection"):
                 repo = MongoClientRepository()
-                repo._client = None # Force re-initialization
+                repo._client = None 
                 repo._ensure_client()
 
             mock_mongo.assert_called_once_with("mongodb://localhost", serverSelectionTimeoutMS=5000)
